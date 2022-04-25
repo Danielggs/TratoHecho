@@ -33,9 +33,12 @@ public class RegistroController {
             @RequestParam("password") String password,
             @RequestParam("password2") String password2,
             @RequestParam("rol") String rol,
+            @RequestParam("email")String correoElectronico,
+            @RequestParam("telefono") String numeroDeTelefono,
+            @RequestParam("profesion") String profesion,
             Model modelo) {
         try {
-            Usuario usuario = usuarioServicio.registrarUsuario(username, password, password2,rol);
+            Usuario usuario = usuarioServicio.registrarUsuario(username, password, password2,rol,correoElectronico,numeroDeTelefono,profesion);
             return "index";
         } catch (Exception ex) {
             ex.printStackTrace();

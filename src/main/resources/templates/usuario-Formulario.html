@@ -29,14 +29,20 @@ and open the template in the editor.
             <h2>FORMULARIO CLIENTE</h2>
             <form th:action="@{/registro/save}" method="POST">
                 <p>elija nombre de usuario</p>
-                <input type="text" name="username" placeholder="nombre"/><br>
+                <input type="text" name="username" placeholder="nombre de usuario"><br>
                 <p>Ingrese una contraseña</p>
-                <input type="password" name="password"/><br>
+                <input type="password" name="password"><br>
                 <p>Ingrese la misma contraseña</p>
-                <input type="password" name="password2"/><br>
-                <input hidden name="rol" value="CLIENTE"/>
-                
-                <input type="submit" name="Registrar"/>
+                <input type="password" name="password2"><br>
+                <input hidden name="rol" value="CLIENTE">
+                <p> Correo Electronico </p>
+                <input type="email" name="email" ><br>
+                    <p> Numero De telefono </p>
+                 <input type="tel" id="phone" name="telefono"
+                pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                required><br>
+                <input hidden name="profesion" value="cliente" ><br>
+                <input type="submit" name="Registrar">
             </form>
         </div>  
 
@@ -45,14 +51,23 @@ and open the template in the editor.
             <h2>FORMULARIO TRABAJADOR</h2>
             <form th:action="@{/registro/save}" method="POST">
                 <p>elija nombre de usuario</p>
-                <input type="text" name="username" placeholder="nombre"/><br>
+                <input type="text" name="username" placeholder="nombre"><br>
                 <p>Ingrese una contraseña</p>
-                <input type="password" name="password"/><br>
+                <input type="password" name="password"><br>
                 <p>Ingrese la misma contraseña</p>
-                <input type="password" name="password2"/><br>
-                 <input hidden name="rol" value="TRABAJADOR"/>
+                <input type="password" name="password2"><br>
+                 <input hidden name="rol" value="TRABAJADOR">
+                  <p> Correo Electronico </p>
+                <input type="email" name="email" ><br>
+                 <p> Numero De telefono </p>
+                <input type="tel" id="phone" name="telefono"
+                pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                required><br>
+                 <p> Profesion </p>
+                <input type="text" name="profesion" ><br>
+                
 
-                <input type="submit" name="Registrar" />
+                <input type="submit" name="Registrar" >
             </form>
 
             <!--  <option th:value="'CLIENTE'" th:text="CLIENTE"></option>

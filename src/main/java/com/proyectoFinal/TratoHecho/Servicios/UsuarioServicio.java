@@ -27,7 +27,7 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
-    public Usuario registrarUsuario(String username, String password, String password2, String rol) throws Exception {
+    public Usuario registrarUsuario(String username, String password, String password2, String rol, String correoElectronico, String numeroDeTelefono,String profesion) throws Exception {
         if (username.isEmpty()) {
             throw new Exception("debe ingresar un nombre de usuario");
         }
@@ -46,8 +46,11 @@ public class UsuarioServicio implements UserDetailsService {
 
         usuario = new Usuario();
         usuario.setUsername(username);
+        usuario.setProfesion(profesion);
+        usuario.setNumeroDeTelefono(numeroDeTelefono);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         usuario.setRol(Rol.valueOf(rol));
+        usuario.setCorreoElectronico(correoElectronico);
         usuario.setPassword(encoder.encode(password));
         return usuarioRepositorio.save(usuario);
     }
