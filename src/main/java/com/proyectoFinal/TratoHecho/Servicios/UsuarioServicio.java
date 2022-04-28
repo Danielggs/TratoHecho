@@ -8,6 +8,7 @@ package com.proyectoFinal.TratoHecho.Servicios;
 
 import com.proyectoFinal.TratoHecho.Entidades.Usuario;
 import com.proyectoFinal.TratoHecho.Repositori.UsuarioRepositorio;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +21,8 @@ public class UsuarioServicio {
     public Usuario guardarUsuario(Usuario usuario){
     
         return usuarioRepositorio.save(usuario);
+    }
+    public List<Usuario> listarUsuarios(){
+        return usuarioRepositorio.findAll();
     }
 }
