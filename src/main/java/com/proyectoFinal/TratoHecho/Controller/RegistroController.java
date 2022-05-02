@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/registro")
@@ -36,7 +37,15 @@ public class RegistroController {
             @RequestParam("email")String correoElectronico,
             @RequestParam("telefono") String numeroDeTelefono,
             @RequestParam("profesion") String profesion,
+            @RequestParam("foto") String foto,
+            MultipartFile fotoa,
+            
             Model modelo) {
+        
+        if (!fotoa.isEmpty()) {
+            String ruta ="G://Nueva carpeta";
+            
+        }
         try {
             Usuario usuario = usuarioServicio.registrarUsuario(username, password, password2,rol,correoElectronico,numeroDeTelefono,profesion);
             return "index";

@@ -17,6 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Data
+
 public class Usuario {
     
     @Id
@@ -31,6 +32,7 @@ public class Usuario {
     private String numeroDeTelefono;
     private String correoElectronico;
     private String Profesion ;
+    private String foto;
                 
 
 }

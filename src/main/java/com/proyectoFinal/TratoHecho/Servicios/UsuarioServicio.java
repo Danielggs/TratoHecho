@@ -54,6 +54,15 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setPassword(encoder.encode(password));
         return usuarioRepositorio.save(usuario);
     }
+    
+     public Usuario buscarUId(String id) {
+        return usuarioRepositorio.getById(id);
+    }
+     
+      public List<Usuario> ListarTrabajadores(){
+         return  usuarioRepositorio.listarTrabajadores();
+     }
+    
 
 
     @Override

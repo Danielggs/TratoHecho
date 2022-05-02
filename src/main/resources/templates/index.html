@@ -17,25 +17,24 @@ and open the template in the editor.
 
         <p sec:authorize="isAuthenticated()">Usuario: <span sec:authentication="name"></span></p>
         <div sec:authorize="isAuthenticated()">
-            <p sec:authorize="isAuthenticated()">
+
             <form th:action="@{/logout}" method="POST">
                 <input type="submit" value="log out">
             </form>
-        </p>
-    </div>
-    <p sec:authorize="!isAuthenticated()">
-        <a href="/login">Ingresar</a><br>
-    </p>
-    <p sec:authorize="!isAuthenticated()">
-        <a href="/registro">Registrarse</a>
-    </p>
+            <a href="/usuario/perfil">perfil</a>
+
+        </div>
+        <div sec:authorize="!isAuthenticated()">
+            <a href="/login">Ingresar</a><br>
+            <a href="/registro">Registrarse</a>
+
+        </div>
 
 
 
 
 
 
-
-</body>
+    </body>
 
 </html>
