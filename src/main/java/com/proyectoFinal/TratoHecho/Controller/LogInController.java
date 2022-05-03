@@ -6,23 +6,22 @@
 
 package com.proyectoFinal.TratoHecho.Controller;
 
-import com.proyectoFinal.TratoHecho.Repositori.UsuarioRepositorio;
-import com.proyectoFinal.TratoHecho.Servicios.UsuarioServicio;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/usuario")
-public class UsuarioController {
+@RequestMapping("/login")
+
+public class LogInController{
     
-    @GetMapping("/perfil")
-    public String perfil(){
-       
-        
-        return "Perfil";
+    @GetMapping("")
+    public String login(){
+        return "Login";
     }
+    
     
 
 }
+
+

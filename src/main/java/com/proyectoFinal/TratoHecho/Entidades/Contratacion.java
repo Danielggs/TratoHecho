@@ -6,10 +6,15 @@
 
 package com.proyectoFinal.TratoHecho.Entidades;
 
+import com.proyectoFinal.TratoHecho.Entidades.Enum.Estado;
+import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -21,13 +26,19 @@ public class Contratacion {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2" )
     private String id;
+    private String nombre;
+    private String descripcion;
     
-    @OneToOne
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaContratacion;
+    
+    @ManyToOne
     private Usuario cliente;
     
-    @OneToOne
+    @ManyToOne
     private Usuario trabajador;
-
     
+    @Enumerated
+    private Estado estado;                                                                                                                     
        
 }

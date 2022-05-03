@@ -10,7 +10,31 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+
     <body>
-        <div>Pagina Principal</div>
+        <h1>Trato Hecho</h1>
+
+
+        <p sec:authorize="isAuthenticated()">Usuario: <span sec:authentication="name"></span></p>
+        <div sec:authorize="isAuthenticated()">
+
+            <form th:action="@{/logout}" method="POST">
+                <input type="submit" value="log out">
+            </form>
+            <a href="/usuario/perfil">perfil</a>
+
+        </div>
+        <div sec:authorize="!isAuthenticated()">
+            <a href="/login">Ingresar</a><br>
+            <a href="/registro">Registrarse</a>
+
+        </div>
+
+
+
+
+
+
     </body>
+
 </html>

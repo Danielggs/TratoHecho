@@ -12,11 +12,13 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Data
+
 public class Usuario {
     
     @Id
@@ -27,5 +29,13 @@ public class Usuario {
     private String password;
     @Enumerated(EnumType.STRING)
     private Rol rol;
+    private String direccion;
+    private String numeroDeTelefono;
+    private String correoElectronico;
+    private String Profesion ;
+    
+    @OneToOne
+    private Foto foto;
+                
 
 }

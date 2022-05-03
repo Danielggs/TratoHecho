@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head th:replace="layout :: head">
+    </head>
+    <body>
+       
+        <div class="container mt-5">
+             <div style="display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                 grid-gap: 1px;">
+            <div th:each="pepe: ${listaDetrabajadores}">
+            <div class="raw justify-content-center">
+                <div class="card m-1 p-1" style="width: 30%">
+                    <div>
+                        <p> nombre</p>
+                        <p th:text="${pepe.username}"></p>
+                        <p>Numero De telefono</p>
+                        <p th:text="${pepe.numeroDeTelefono}"></p>
+                        <p>Profesion</p>
+                        <p th:text="${pepe.Profesion}"></p>
+                    </div>
+                    
+                </div>
+             
+                  </div>
+              </div>
+             </div>
+         </div>
+        
+       
+    </body>
+</html>
