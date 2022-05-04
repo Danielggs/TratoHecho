@@ -27,7 +27,7 @@ and open the template in the editor.
 
         <div id="CLIENTE" class="element" style="display: none;">
             <h2>FORMULARIO CLIENTE</h2>
-            <form th:action="@{/registro/save}" method="POST">
+            <form action="/registro/registrar" method="POST" enctype="multipart/form-data">
                 <p>elija nombre de usuario</p>
                 <input type="text" name="username" placeholder="nombre de usuario"><br>
                 <p>Ingrese una contraseña</p>
@@ -42,14 +42,16 @@ and open the template in the editor.
                 pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                 required><br>
                 <input hidden name="profesion" value="cliente" ><br>
-                <input type="submit" name="Registrar">
+                <p>Foto<p/>
+                <input type="file" name="archivo"><br>
+                <input type="submit" name="registrar">
             </form>
         </div>  
 
 
         <div id="TRABAJADOR" class="element" style="display: none;">
             <h2>FORMULARIO TRABAJADOR</h2>
-            <form th:action="@{/registro/save}" method="POST">
+            <form action="/registro/registrar" method="POST" enctype="multipart/form-data">
                 <p>elija nombre de usuario</p>
                 <input type="text" name="username" placeholder="nombre"><br>
                 <p>Ingrese una contraseña</p>
@@ -65,7 +67,8 @@ and open the template in the editor.
                 required><br>
                  <p> Profesion </p>
                 <input type="text" name="profesion" ><br>
-                
+                <p>Foto<p/>
+                <input type="file" name="archivo"><br>
 
                 <input type="submit" name="Registrar" >
             </form>

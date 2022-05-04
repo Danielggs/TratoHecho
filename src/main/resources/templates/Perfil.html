@@ -5,12 +5,14 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <head th:replace="layout">
+    <head th:replace="layout" xmlns:th="http://www.thymeleaf.org">
        
     </head>
     <body>
-        <div>Perfil</div>
-        <p sec:authorize="isAuthenticated()">Usuario: <span sec:authentication="name"></span></p>
-        
-    </body>
+        <div>Perfil
+        <p>Nombre : <span th:text="${session.usuario.username}"></span></p>
+        <p>Profesion : <span th:text="${session.usuario.Profesion}"></span></p>
+        <img th:src="@{/foto/usuario(idUsuario=${session.usuario.id})}" alt="foto de perfil"/>
+            </div>
+       </body>
 </html>

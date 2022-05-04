@@ -8,30 +8,42 @@ and open the template in the editor.
     <head th:replace="layout :: head">
     </head>
     <body>
-       
-        <div class="container mt-5">
-             <div style="display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                 grid-gap: 1px;">
-            <div th:each="pepe: ${listaDetrabajadores}">
-            <div class="raw justify-content-center">
-                <div class="card m-1 p-1" style="width: 30%">
-                    <div>
-                        <p> nombre</p>
-                        <p th:text="${pepe.username}"></p>
-                        <p>Numero De telefono</p>
-                        <p th:text="${pepe.numeroDeTelefono}"></p>
-                        <p>Profesion</p>
-                        <p th:text="${pepe.Profesion}"></p>
+
+   
+           
+          <div class="container mt-5">
+           
+                <div th:each="pepe: ${listaDetrabajadores}">
+                    <div class="raw justify-content-center">
+                        <div class="card m-1 p-1" style="width: 30%">
+                            <div class="raw">
+                                <div class="col-md-7">
+                                    <img class="float-left ml-1" th:if="${pepe.foto != null}" th:src="@{/foto/usuario(idUsuario=${pepe.id})}"
+                                         style="max-width:90%;max-height:100;">    
+                                    
+                                     <img class="float-left ml-1" th:if="${pepe.foto == null}" th:src="@{/img/descarga.jpg}"
+                                          style="max-width:90%;max-height:100;">  
+                                </div>
+                                <div class="col-md-7 mt-3">
+                                    <p> nombre <span th:text="${pepe.username}"></span></p>
+                                
+                                    <p>Numero De telefono <span th:text="${pepe.numeroDeTelefono}"></span></p>
+                               
+                                    <p>Profesion <span th:text="${pepe.Profesion}"></span></p>
+                              
+                                </div>
+                                
+                                
+                            </div>
+
+                        </div>
+
                     </div>
-                    
                 </div>
-             
-                  </div>
-              </div>
-             </div>
-         </div>
-        
-       
+            
+           
+        </div>
+
+
     </body>
 </html>

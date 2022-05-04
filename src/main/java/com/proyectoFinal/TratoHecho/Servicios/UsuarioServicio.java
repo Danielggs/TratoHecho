@@ -7,10 +7,12 @@
 package com.proyectoFinal.TratoHecho.Servicios;
 
 import com.proyectoFinal.TratoHecho.Entidades.Enum.Rol;
+import com.proyectoFinal.TratoHecho.Entidades.Foto;
 import com.proyectoFinal.TratoHecho.Entidades.Usuario;
 import com.proyectoFinal.TratoHecho.Repositori.UsuarioRepositorio;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,14 +22,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
+    @Autowired
+    private FotoServicio fotoServicio;
 
-    public Usuario registrarUsuario(String username, String password, String password2, String rol, String correoElectronico, String numeroDeTelefono,String profesion) throws Exception {
+    public Usuario registrarUsuario(String username, String password, String password2, String rol, String correoElectronico, String numeroDeTelefono,String profesion, MultipartFile archivo) throws Exception {
         if (username.isEmpty()) {
             throw new Exception("debe ingresar un nombre de usuario");
         }
@@ -52,6 +59,10 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setRol(Rol.valueOf(rol));
         usuario.setCorreoElectronico(correoElectronico);
         usuario.setPassword(encoder.encode(password));
+        
+        Foto foto = fotoServicio.guardar(archivo);
+        usuario.setFoto(foto);
+        
         return usuarioRepositorio.save(usuario);
     }
     
@@ -63,13 +74,19 @@ public class UsuarioServicio implements UserDetailsService {
          return  usuarioRepositorio.listarTrabajadores();
      }
     
-
+      public void agregarUsuarioSession(Usuario usuario){
+        
+          ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+          HttpSession session = attributes.getRequest().getSession(true);
+          session.setAttribute("usuario", usuario);
+      }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
             Usuario usuario = usuarioRepositorio.buscarUsuario(username);
             List<GrantedAuthority> authority = new ArrayList<>();
+            agregarUsuarioSession(usuario);
             authority.add(new SimpleGrantedAuthority("ROLE_" + usuario.getRol()));
             return new User(username, usuario.getPassword(), authority);
         } catch (Exception e) {

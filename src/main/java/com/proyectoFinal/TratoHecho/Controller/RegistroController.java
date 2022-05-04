@@ -10,6 +10,7 @@ import com.proyectoFinal.TratoHecho.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,25 +30,29 @@ public class RegistroController {
 
     }
 
-    @PostMapping("/save")
-    public String registroUsuario(@RequestParam("username") String username,
+    @PostMapping("/registrar")
+    public String registrar(@RequestParam("username") String username,
             @RequestParam("password") String password,
             @RequestParam("password2") String password2,
             @RequestParam("rol") String rol,
-            @RequestParam("email")String correoElectronico,
+            @RequestParam("email") String correoElectronico,
             @RequestParam("telefono") String numeroDeTelefono,
             @RequestParam("profesion") String profesion,
-            @RequestParam("foto") String foto,
-            MultipartFile fotoa,
-            
-            Model modelo) {
+            MultipartFile archivo,
+            ModelMap modelo) {
+        //no se como hacer para poner una foto en caso de que llegue vacio el archivo
+        //if (archivo.isEmpty()) {
+          //  System.out.println("No hay foto, no se por que");
+        //}
         
-        if (!fotoa.isEmpty()) {
-            String ruta ="G://Nueva carpeta";
-            
-        }
+        System.out.println("usuario: " + username);
+        System.out.println("rol: " + rol);
+        System.out.println("Mail: " + correoElectronico);
+
+
+        //}
         try {
-            Usuario usuario = usuarioServicio.registrarUsuario(username, password, password2,rol,correoElectronico,numeroDeTelefono,profesion);
+            usuarioServicio.registrarUsuario(username, password, password2, rol, correoElectronico, numeroDeTelefono, profesion, archivo);
             return "index";
         } catch (Exception ex) {
             ex.printStackTrace();
