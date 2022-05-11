@@ -26,7 +26,7 @@ public class RegistroController {
 
     @GetMapping("")
     public String registro() {
-        return "usuario-Formulario";
+        return "registro";
 
     }
 
@@ -53,15 +53,20 @@ public class RegistroController {
         //}
         try {
             usuarioServicio.registrarUsuario(username, password, password2, rol, correoElectronico, numeroDeTelefono, profesion, archivo);
-            return "index";
         } catch (Exception ex) {
             ex.printStackTrace();
             modelo.addAttribute("username", username);
             modelo.addAttribute("password", password);
             modelo.addAttribute("password2", password2);
             modelo.addAttribute("error", ex.getMessage());
-            return "usuario-Formulario";
+            return "registro";
         }
+        
+        modelo.put("titulo", "Bienvenido a Trato Hecho!");
+        modelo.put("descripcion", "Tu usuario " + username + " se creó con éxito");
+
+        return "exito.html";
+        
     }
 
 }

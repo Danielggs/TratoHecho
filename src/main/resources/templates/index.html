@@ -1,40 +1,15 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
+<html xmlns:th="http://www.thymeleaf.org"  layout:decorate="~{layout}">
     <head>
-        <title>Index</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-
     <body>
-        <h1>Trato Hecho</h1>
-
-
-        <p sec:authorize="isAuthenticated()">Usuario: <span sec:authentication="name"></span></p>
-        <div sec:authorize="isAuthenticated()">
-
-            <form th:action="@{/logout}" method="POST">
-                <input type="submit" value="log out">
-            </form>
-            <a href="/usuario/perfil">perfil</a>
-
-        </div>
-        <div sec:authorize="!isAuthenticated()">
-            <a href="/login">Ingresar</a><br>
-            <a href="/registro">Registrarse</a>
-
-        </div>
-
-
-
-
-
-
-    </body>
-
+        
+        <main layout:fragment="main">
+            <p th:if="${error != null}" th:text="${error}" style="color: red;"></p>
+            <p th:if="${logout != null}" th:text="${logout}" style="color: green;"></p>
+            <section th:replace="layout :: sobre-nosotros"></section>
+            <section th:replace="layout :: portfolio"></section>
+        </main>
+        
+        </body>
 </html>

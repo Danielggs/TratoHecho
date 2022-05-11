@@ -17,6 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Data
@@ -26,10 +27,10 @@ public class Contratacion {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2" )
     private String id;
-    private String nombre;
     private String descripcion;
     
     @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     private Date fechaContratacion;
     
     @ManyToOne

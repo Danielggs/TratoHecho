@@ -60,8 +60,10 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setCorreoElectronico(correoElectronico);
         usuario.setPassword(encoder.encode(password));
         
-        Foto foto = fotoServicio.guardar(archivo);
+         if (archivo != null) {
+            Foto foto = fotoServicio.guardar(archivo);
         usuario.setFoto(foto);
+        }
         
         return usuarioRepositorio.save(usuario);
     }
@@ -70,28 +72,33 @@ public class UsuarioServicio implements UserDetailsService {
         return usuarioRepositorio.getById(id);
     }
      
-      public List<Usuario> ListarTrabajadores(){
+      public List<Usuario> listarTrabajadores(){
          return  usuarioRepositorio.listarTrabajadores();
      }
-    
-      public void agregarUsuarioSession(Usuario usuario){
-        
-          ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-          HttpSession session = attributes.getRequest().getSession(true);
-          session.setAttribute("usuario", usuario);
+      
+      public List<Usuario> listarTrabajadoresPorProfesion(String profesion){
+          return usuarioRepositorio.listarTrabajadoresPorProfesion(profesion);
       }
-
+    
+    
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        try {
-            Usuario usuario = usuarioRepositorio.buscarUsuario(username);
-            List<GrantedAuthority> authority = new ArrayList<>();
-            agregarUsuarioSession(usuario);
-            authority.add(new SimpleGrantedAuthority("ROLE_" + usuario.getRol()));
-            return new User(username, usuario.getPassword(), authority);
-        } catch (Exception e) {
-            throw new UsernameNotFoundException("el usuario no existe");
+        Usuario usuario = usuarioRepositorio.buscarUsuario(username);
+        if (usuario != null) {
+
+            List<GrantedAuthority> permisos = new ArrayList<>();
+            permisos.add(new SimpleGrantedAuthority("ROLE_" + usuario.getRol()));
+            
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession session = attr.getRequest().getSession(true);
+            session.setAttribute("usuario", usuario);
+
+            User user = new User(username, usuario.getPassword(), permisos);
+            return user;
+        } else {
+            return null;
         }
+        
     }
 
 }

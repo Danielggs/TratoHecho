@@ -11,7 +11,7 @@
 	<groupId>com.proyectoFinal</groupId>
 	<artifactId>TratoHecho</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>TratoHecho</name>
+	<name>TratoHecho.v2</name>
 	<description>a</description>
 	<properties>
 		<java.version>1.8</java.version>

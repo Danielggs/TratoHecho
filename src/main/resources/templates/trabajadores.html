@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+    <head>
+    </head>
+    <body>
+        <main layout:fragment="main">
+            <span th:if="${error != null}" th:text="${error}" style="color: red;"></span>
+            <section th:replace="layout :: portfolio">
+            </section>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">username</th>
+                        <th scope="col">profesion</th>
+                        <th scope="col">contratar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="trabajador, contador : ${trabajadores}">
+                        <th th:text="${contador.count}"></th>
+                        <td th:text="${trabajador.username}"></td>
+                        <td th:text="${trabajador.Profesion}"></td>
+                        <td><a th:href="@{/usuario/contratar(idTrabajador = ${trabajador.id})}"><button>Contratar</button></a></td>
+                    </tr>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+    </body>
+</html>
